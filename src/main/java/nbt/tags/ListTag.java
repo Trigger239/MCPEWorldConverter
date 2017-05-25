@@ -23,20 +23,20 @@ public class ListTag extends Tag<ArrayList<Tag>> {
         return NBTConstants.NBTType.LIST;
     }
 
-    public void put(Tag newTag){
+    public void put(Tag newTag) {
         ArrayList<Tag> list = getValue();
-        if(list == null) return;
+        if (list == null) return;
         list.add(newTag);
         setValue(list);
     }
 
-    public void remove(String name){
+    public void remove(String name) {
         ArrayList<Tag> list = getValue();
-        if(list == null) return;
+        if (list == null) return;
         Iterator it = list.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Tag tag = (Tag) it.next();
-            if(tag.getName().equals(name)) {
+            if (tag.getName().equals(name)) {
                 it.remove();
                 setValue(list);
                 break;
@@ -45,7 +45,7 @@ public class ListTag extends Tag<ArrayList<Tag>> {
     }
 
 
-    public String toString(){
+    public String toString() {
         String name = getName();
         String type = getType().name();
         ArrayList<Tag> value = getValue();
@@ -53,15 +53,15 @@ public class ListTag extends Tag<ArrayList<Tag>> {
         bldr.append(type == null ? "?" : ("TAG_" + type))
                 .append(name == null ? "(?)" : ("(" + name + ")"));
 
-        if(value != null) {
+        if (value != null) {
             bldr.append(": ")
-                .append(value.size())
-                .append(" entries\n[\n");
+                    .append(value.size())
+                    .append(" entries\n[\n");
             for (Tag entry : value) {
                 //pad every line of the value
                 bldr.append("   ")
-                    .append(entry.toString().replaceAll("\n", "\n   "))
-                    .append("\n");
+                        .append(entry.toString().replaceAll("\n", "\n   "))
+                        .append("\n");
             }
             bldr.append("]");
         } else bldr.append(":?");
@@ -72,9 +72,9 @@ public class ListTag extends Tag<ArrayList<Tag>> {
 
     @Override
     public ListTag getDeepCopy() {
-        if(value != null){
+        if (value != null) {
             ArrayList<Tag> copy = new ArrayList<>();
-            for(Tag tag : value){
+            for (Tag tag : value) {
                 copy.add(tag.getDeepCopy());
             }
             return new ListTag(name, copy);

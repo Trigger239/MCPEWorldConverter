@@ -111,9 +111,10 @@ public class NBTOutputStream
         int[] ints = tag.getValue();
         this.os.writeInt(this.littleEndian ? Integer.reverseBytes(ints.length) : ints.length);
 
-        if(littleEndian) for(int v : ints){
+        if (littleEndian) for (int v : ints) {
             this.os.writeInt(Integer.reverseBytes(v));
-        } else for(int v : ints){
+        }
+        else for (int v : ints) {
             this.os.writeInt(v);
         }
     }
@@ -123,9 +124,10 @@ public class NBTOutputStream
         short[] shorts = tag.getValue();
         this.os.writeInt(this.littleEndian ? Integer.reverseBytes(shorts.length) : shorts.length);
 
-        if(littleEndian) for(short v : shorts){
+        if (littleEndian) for (short v : shorts) {
             this.os.writeShort(Short.reverseBytes(v));
-        } else for(short v : shorts){
+        }
+        else for (short v : shorts) {
             this.os.writeShort(v);
         }
     }

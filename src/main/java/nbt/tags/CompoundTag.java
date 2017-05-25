@@ -20,22 +20,22 @@ public class CompoundTag extends Tag<ArrayList<Tag>> {
     }
 
 
-    public Tag getChildTagByKey(String key){
+    public Tag getChildTagByKey(String key) {
         List<Tag> list = getValue();
-        if(list == null) return null;
-        for(Tag tag : list){
-            if(key.equals(tag.getName())) return tag;
+        if (list == null) return null;
+        for (Tag tag : list) {
+            if (key.equals(tag.getName())) return tag;
         }
         return null;
     }
 
-    public void put(Tag newTag){
+    public void put(Tag newTag) {
         ArrayList<Tag> list = getValue();
-        if(list == null) return;
+        if (list == null) return;
         Iterator it = list.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Tag tag = (Tag) it.next();
-            if(tag.getName().equals(newTag.getName())){
+            if (tag.getName().equals(newTag.getName())) {
                 remove(newTag.getName());
                 break;
             }
@@ -44,13 +44,13 @@ public class CompoundTag extends Tag<ArrayList<Tag>> {
         setValue(list);
     }
 
-    public void remove(String name){
+    public void remove(String name) {
         ArrayList<Tag> list = getValue();
-        if(list == null) return;
+        if (list == null) return;
         Iterator it = list.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             Tag tag = (Tag) it.next();
-            if(tag.getName().equals(name)) {
+            if (tag.getName().equals(name)) {
                 it.remove();
                 setValue(list);
                 break;
@@ -58,23 +58,23 @@ public class CompoundTag extends Tag<ArrayList<Tag>> {
         }
     }
 
-    public String toString(){
+    public String toString() {
         String name = getName();
         String type = getType().name();
         ArrayList<Tag> value = getValue();
         StringBuilder bldr = new StringBuilder();
         bldr.append(type == null ? "?" : ("TAG_" + type))
-            .append(name == null ? "(?)" : ("(" + name + ")"));
+                .append(name == null ? "(?)" : ("(" + name + ")"));
 
-        if(value != null) {
+        if (value != null) {
             bldr.append(": ")
-                .append(value.size())
-                .append(" entries\n{\n");
+                    .append(value.size())
+                    .append(" entries\n{\n");
             for (Tag entry : value) {
                 //pad every line of the value
                 bldr.append("   ")
-                    .append(entry.toString().replaceAll("\n", "\n   "))
-                    .append("\n");
+                        .append(entry.toString().replaceAll("\n", "\n   "))
+                        .append("\n");
             }
             bldr.append("}");
 
@@ -85,9 +85,9 @@ public class CompoundTag extends Tag<ArrayList<Tag>> {
 
     @Override
     public CompoundTag getDeepCopy() {
-        if(value != null){
+        if (value != null) {
             ArrayList<Tag> copy = new ArrayList<>();
-            for(Tag tag : value){
+            for (Tag tag : value) {
                 copy.add(tag.getDeepCopy());
             }
             return new CompoundTag(name, copy);

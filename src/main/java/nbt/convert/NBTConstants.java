@@ -34,7 +34,7 @@ public class NBTConstants {
         static public Map<Integer, NBTType> typesByID = new HashMap<>();
         static public Map<Class<? extends Tag>, NBTType> typesByClazz = new HashMap<>();
 
-        NBTType(int id, Class<? extends Tag> tagClazz, String displayName){
+        NBTType(int id, Class<? extends Tag> tagClazz, String displayName) {
             this.id = id;
             this.tagClazz = tagClazz;
             this.displayName = displayName;
@@ -62,32 +62,44 @@ public class NBTConstants {
 
             int len = editorOptions_asType.length;
             editorOptions_asString = new String[len];
-            for(int i = 0; i < len; i++){
+            for (int i = 0; i < len; i++) {
                 editorOptions_asString[i] = editorOptions_asType[i].displayName;
             }
 
 
             //fill maps
-            for(NBTType type : NBTType.values()){
+            for (NBTType type : NBTType.values()) {
                 typesByID.put(type.id, type);
                 typesByClazz.put(type.tagClazz, type);
             }
         }
 
-        public static Tag newInstance(String tagName, NBTType type){
-            switch (type){
-                case END: return new EndTag();
-                case BYTE: return new ByteTag(tagName, (byte) 0);
-                case SHORT: return new ShortTag(tagName, (short) 0);
-                case INT: return new IntTag(tagName, 0);
-                case LONG: return new LongTag(tagName, 0L);
-                case FLOAT: return new FloatTag(tagName, 0f);
-                case DOUBLE: return new DoubleTag(tagName, 0.0);
-                case BYTE_ARRAY: return new ByteArrayTag(tagName, null);
-                case STRING: return new StringTag(tagName, "");
-                case LIST: return new ListTag(tagName, new ArrayList<Tag>());
-                case COMPOUND: return new CompoundTag(tagName, new ArrayList<Tag>());
-                default: return null;
+        public static Tag newInstance(String tagName, NBTType type) {
+            switch (type) {
+                case END:
+                    return new EndTag();
+                case BYTE:
+                    return new ByteTag(tagName, (byte) 0);
+                case SHORT:
+                    return new ShortTag(tagName, (short) 0);
+                case INT:
+                    return new IntTag(tagName, 0);
+                case LONG:
+                    return new LongTag(tagName, 0L);
+                case FLOAT:
+                    return new FloatTag(tagName, 0f);
+                case DOUBLE:
+                    return new DoubleTag(tagName, 0.0);
+                case BYTE_ARRAY:
+                    return new ByteArrayTag(tagName, null);
+                case STRING:
+                    return new StringTag(tagName, "");
+                case LIST:
+                    return new ListTag(tagName, new ArrayList<Tag>());
+                case COMPOUND:
+                    return new CompoundTag(tagName, new ArrayList<Tag>());
+                default:
+                    return null;
             }
         }
 

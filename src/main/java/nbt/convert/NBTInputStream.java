@@ -70,7 +70,7 @@ public final class NBTInputStream
 
         NBTConstants.NBTType nbtType = NBTConstants.NBTType.typesByID.get(type);
 
-        if(nbtType == null) throw new IOException("Invalid tag type: " + type + ".");
+        if (nbtType == null) throw new IOException("Invalid tag type: " + type + ".");
 
         int length;
         byte[] bytes;
@@ -109,7 +109,7 @@ public final class NBTInputStream
                 length = this.littleEndian ? Integer.reverseBytes(this.is.readInt()) : this.is.readInt();
 
                 NBTConstants.NBTType childNbtType = NBTConstants.NBTType.typesByID.get(childType);
-                if(childNbtType.id == 0) return new ListTag(name, new ArrayList<Tag>());
+                if (childNbtType.id == 0) return new ListTag(name, new ArrayList<Tag>());
                 Class<? extends Tag> clazz = childNbtType.tagClazz;
                 ArrayList<Tag> tagList = new ArrayList<>();
                 for (int i = 0; i < length; i++) {
@@ -135,9 +135,10 @@ public final class NBTInputStream
             case INT_ARRAY: {
                 length = this.littleEndian ? Integer.reverseBytes(this.is.readInt()) : this.is.readInt();
                 int[] ints = new int[length];
-                if(this.littleEndian) for (int i = 0; i < length; i++) {
+                if (this.littleEndian) for (int i = 0; i < length; i++) {
                     ints[i] = Integer.reverseBytes(this.is.readInt());
-                } else for (int i = 0; i < length; i++) {
+                }
+                else for (int i = 0; i < length; i++) {
                     ints[i] = this.is.readInt();
                 }
                 return new IntArrayTag(name, ints);
@@ -145,15 +146,16 @@ public final class NBTInputStream
             case SHORT_ARRAY: {
                 length = this.littleEndian ? Integer.reverseBytes(this.is.readInt()) : this.is.readInt();
                 short[] shorts = new short[length];
-                if(this.littleEndian) for (int i = 0; i < length; i++) {
+                if (this.littleEndian) for (int i = 0; i < length; i++) {
                     shorts[i] = Short.reverseBytes(this.is.readShort());
-                } else for (int i = 0; i < length; i++) {
+                }
+                else for (int i = 0; i < length; i++) {
                     shorts[i] = this.is.readShort();
                 }
                 return new ShortArrayTag(name, shorts);
             }
             default: {
-                throw new IOException("Unhandled NBT type!!! type: "+type);
+                throw new IOException("Unhandled NBT type!!! type: " + type);
             }
         }
     }

@@ -20,7 +20,7 @@ public class FloatTag extends Tag<Float> {
         return new FloatTag(name, value);
     }
 
-    public DoubleTag toDoubleTag(){
+    public DoubleTag toDoubleTag() {
         return new DoubleTag(this.name, (double) this.getValue());
     }
 }

@@ -29,11 +29,11 @@ public abstract class Tag<T> implements Serializable {
         this.name = name;
     }
 
-    public T getValue(){
+    public T getValue() {
         return value;
     }
 
-    public void setValue(T value){
+    public void setValue(T value) {
         this.value = value;
     }
 
@@ -41,13 +41,13 @@ public abstract class Tag<T> implements Serializable {
 
     public abstract Tag<T> getDeepCopy();
 
-    public String toString(){
+    public String toString() {
         String name = getName();
         String type = getType().name();
         T value = getValue();
-        return (type == null ? "?" : ("TAG_"+type))
-                + (name == null ? "(?)" : ("("+name+")"))
-                + (value == null ? ":?" : (": "+value.toString()));
+        return (type == null ? "?" : ("TAG_" + type))
+                + (name == null ? "(?)" : ("(" + name + ")"))
+                + (value == null ? ":?" : (": " + value.toString()));
     }
 
 

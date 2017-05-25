@@ -1,7 +1,6 @@
 package nbt.convert;
 
 import nbt.tags.CompoundTag;
-import nbt.tags.IntArrayTag;
 
 import java.io.*;
 import java.util.zip.GZIPInputStream;
@@ -23,8 +22,8 @@ public final class LevelDataConverter {
     public static CompoundTag read(File file, boolean compressed, boolean littleEndian) throws IOException {
         FileInputStream fis = new FileInputStream(file);
         InputStream is;
-        if(compressed) is = new GZIPInputStream(fis);
-        else{
+        if (compressed) is = new GZIPInputStream(fis);
+        else {
             is = new BufferedInputStream(fis);
             is.skip(8);
         }
@@ -48,17 +47,16 @@ public final class LevelDataConverter {
         dos.close();
     }
 
-    public static void write(CompoundTag levelTag, File file,  boolean compressed, boolean littleEndian) throws IOException {
+    public static void write(CompoundTag levelTag, File file, boolean compressed, boolean littleEndian) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         NBTOutputStream out = new NBTOutputStream(bos, compressed, littleEndian);
         out.writeTag(levelTag);
         out.close();
         FileOutputStream os = new FileOutputStream(file);
         DataOutputStream dos = new DataOutputStream(new BufferedOutputStream(os));
-        if(compressed){
+        if (compressed) {
             bos.writeTo(dos);
-        }
-        else {
+        } else {
             int length = bos.size();
             dos.write(header);
             dos.writeInt(Integer.reverseBytes(length));
